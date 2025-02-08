@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: graphql-postgres-crud
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookdb
+    username: postgres
+    password: mysecretpassword
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  graphql:
+    graphiql:
+      enabled: true
+    cors:
+      allow-credentials: true
+      allowed-origins: http://localhost:5173

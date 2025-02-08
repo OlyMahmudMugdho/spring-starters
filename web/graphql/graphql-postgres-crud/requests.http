@@ -1,0 +1,44 @@
+### 1. Get All Books
+
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "query { findAllBooks { id title author price } }"
+}
+
+### 2. Get a Single Book by ID
+
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "query { findBookById(id: 1) { id title author price } }"
+}
+
+### 3. Create a New Book
+
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { createBook(bookInput: { title: \"The Great Gatsby\", author: \"F. Scott Fitzgerald\", price: 12.99 }) { id title } }"
+}
+
+### 4. Update a Book
+
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { updateBook(id: 1, bookInput: { title: \"Updated Title\", author: \"New Author\", price: 14.99 }) { id title } }"
+}
+
+### 5. Delete a Book
+
+POST http://localhost:8080/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { deleteBook(id: 1) }"
+}
