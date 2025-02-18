@@ -10,11 +10,24 @@ import org.springframework.web.socket.WebSocketSession;
 @Service
 public class WebSocketService {
 
+    // Thread-safe list to store active WebSocket sessions
+    private final static CopyOnWriteArrayList<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
+
+
+    public void addSession(WebSocketSession session) {
+        sessions.add(session);
+    }
+
+
+    public void removeSession(WebSocketSession session) {
+        sessions.remove(session);
+    }
+
     // Broadcast a message to all connected clients
-    public  void broadcastMessage(String message, CopyOnWriteArrayList<WebSocketSession> sessions) throws IOException {
+    public  void broadcastMessage(String message, WebSocketSession senderSession) throws IOException {
         for (WebSocketSession session : sessions) {
             if (session.isOpen()) {
-                session.sendMessage(new TextMessage(message));
+                session.sendMessage(new TextMessage(senderSession.getId() + " : "  +  message));
             }
         }
     }
