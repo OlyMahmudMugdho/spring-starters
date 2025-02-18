@@ -12,4 +12,9 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/chat")
+    public String Chat() {
+        return "chat";
+    }
+
 }
