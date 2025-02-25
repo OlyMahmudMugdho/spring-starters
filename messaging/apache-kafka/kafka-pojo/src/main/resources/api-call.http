@@ -1,0 +1,34 @@
+### Send valid UserMessage
+POST http://localhost:8080/api/messages
+Content-Type: application/json
+
+{
+  "username": "kafka_user",
+  "content": "Hello from HTTP client!"
+}
+
+### Send message with special characters
+POST http://localhost:8080/api/messages
+Content-Type: application/json
+
+{
+  "username": "emoji_user",
+  "content": "Hello 😊 Kafka! 测试"
+}
+
+### Send invalid message (missing username)
+POST http://localhost:8080/api/messages
+Content-Type: application/json
+
+{
+  "content": "This should fail validation"
+}
+
+### Send malformed JSON
+POST http://localhost:8080/api/messages
+Content-Type: application/json
+
+{
+  "username": "bad_json",
+  "content: "missing quote"
+}
