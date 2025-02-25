@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: kafka-cloud-stream
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: my-topic
+          group: my-group
+        output:
+          destination: my-topic
+      kafka:
+        binder:
+          brokers: localhost:9092 # Replace with your Kafka broker address

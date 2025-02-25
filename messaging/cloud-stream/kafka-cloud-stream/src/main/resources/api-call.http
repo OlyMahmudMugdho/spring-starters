@@ -1,0 +1,10 @@
+@customMessage = "random message"
+
+### Send a message to Kafka via the /send endpoint
+GET http://localhost:8080/send?message=HelloKafka
+
+### Send another message to Kafka
+GET http://localhost:8080/send?message=SpringCloudStreamWithKafka
+
+### Send a custom message
+GET http://localhost:8080/send?message={{customMessage}}
