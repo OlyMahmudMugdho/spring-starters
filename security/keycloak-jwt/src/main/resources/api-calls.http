@@ -1,0 +1,87 @@
+@adminAccessToken = eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJvelBNWk5LZXdwZF9aelYwcTRfNkhvd1RpYXFDdXZ2U2FXNU5Qb0QzdVFRIn0.eyJleHAiOjE3NDA0ODcyMTMsImlhdCI6MTc0MDQ4NzE1MywianRpIjoiN2QyYjE0NjctNmVhNi00NzM1LTlkYWYtM2NhOTE3ZTViOWUzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDg4L3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiI4NzUzZjA5NS1mZDRiLTRhMDctOTI4ZC1hYTllMGZmNTg1YjIiLCJzY29wZSI6ImVtYWlsIHByb2ZpbGUifQ.kGzqifUdpnNlUz9UjxNCLUQbMPfgxrXvBZ_6Efv-vYJvV3wZs36ZZccUHBZDmtAiThlv6Vg4tMWFvlGid2GJUijUrbw040Xh5BWfolfpdl8phP3NmSFbXVyWMuZ9YLPmptTF129Cyenx2MJ9OW-6-v4r-gU4onixQWTDHBd6xChxwurrpe63Bev4uSfptSN_ThQb0gPwUpvjLz6ac2tvE6HFf2rG-hKu5rVJMKFvHNHgha4tU0FRuKq7B4eZ3i5s7DmHNV3CB4OhzxIbf388t89Qx5V-HpI1OIzDGkgVZFgkQXA3CuaNG4riGLFjf9cPpPFSjKSV5kp6nMtLAwv05g
+@realmName = my-realm
+@userId = <id>
+@roleId = <role_id>
+@userAccessToken = <user_token>
+@CLIENT_SECRET = oFKSAvp334RG5oTQwjlmS3LJNSNkvMTN
+
+GET http://localhost:8088/admin/realms/my-realm/users
+Authorization: Bearer {{adminAccessToken}}
+
+### Obtain Admin Token
+POST http://localhost:8088/realms/master/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=admin-cli
+    &username=admin
+    &password=admin
+    &grant_type=password
+
+# Save the `access_token` from the response as `{{adminAccessToken}}`.
+
+### Create a New User
+POST http://localhost:8088/admin/realms/{{realmName}}/users
+Authorization: Bearer {{adminAccessToken}}
+Content-Type: application/json
+
+{
+  "username": "mugdho-user",
+  "email": "mugdhodzs38@gmail.om",
+  "firstName": "M. Oly",
+  "lastName": "Mahmud",
+  "enabled": true,
+  "emailVerified": true,
+  "credentials": [
+    {
+      "type": "password",
+      "value": "mugdho-user",
+      "temporary": false
+    }
+  ]
+}
+
+
+### Retrieve the User ID
+GET http://localhost:8088/admin/realms/{{realmName}}/users?username=mugdho-user
+Authorization: Bearer {{adminAccessToken}}
+
+# Extract the `id` field from the response and save it as `{{userId}}`.
+
+### Retrieve the Role ID for "USER"
+
+GET http://localhost:8088/admin/realms/{{realmName}}/roles/USER
+Authorization: Bearer {{adminAccessToken}}
+
+# Extract the `id` field from the response and save it as `{{roleId}}`.
+
+
+### Assign the "USER" Role to the User
+
+POST http://localhost:8088/admin/realms/{{realmName}}/users/{{userId}}/role-mappings/realm
+Authorization: Bearer {{adminAccessToken}}
+Content-Type: application/json
+
+[
+  {
+    "id": "{{roleId}}",
+    "name": "USER"
+  }
+]
+
+### Log In the User
+
+POST http://localhost:8088/realms/my-realm/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=spring-boot-app
+    &client_secret={{CLIENT_SECRET}}
+    &username=mugdho-user
+    &password=mugdho-user
+    &grant_type=password
+
+# Save the `access_token` from the response as `{{userAccessToken}}`.
+
+### Access Protected Endpoint (Optional)
+
+GET http://localhost:8080/user/hello
+Authorization: Bearer {{userAccessToken}}

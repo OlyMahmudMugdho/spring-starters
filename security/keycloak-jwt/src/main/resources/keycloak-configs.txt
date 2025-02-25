@@ -1,0 +1,9 @@
+realm-name my-realm
+client-id spring-boot-app
+client-name spring-boot-app
+Root URL http://localhost:8080
+Home URL http://localhost:8080/home
+Valid redirect URIs http://localhost:8080
+Valid post logout redirect URIs http://localhost:8080/logout-success
+Web origins *
+Client Secret oFKSAvp334RG5oTQwjlmS3LJNSNkvMTN
