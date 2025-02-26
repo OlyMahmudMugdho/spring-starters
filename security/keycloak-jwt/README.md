@@ -232,7 +232,9 @@ curl -X POST "http://localhost:8088/realms/my-realm/protocol/openid-connect/toke
   -d "grant_type=password" \
   -d "client_id=spring-boot-app" \
   -d "username=testuser" \
-  -d "password=password123"
+  -d "password=password123" \
+  -d "client_secret=oFKSAvp334RG5oTQwjlmS3LJNSNkvMTN" \
+  -d "scope=openid"
 ```
 
 ### 6. User Registration
