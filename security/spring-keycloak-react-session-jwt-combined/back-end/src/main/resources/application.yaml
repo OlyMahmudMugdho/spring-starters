@@ -1,0 +1,12 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: spring-boot-app
+            client-secret: oFKSAvp334RG5oTQwjlmS3LJNSNkvMTN
+            scope: openid,profile,email
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8088/realms/my-realm
