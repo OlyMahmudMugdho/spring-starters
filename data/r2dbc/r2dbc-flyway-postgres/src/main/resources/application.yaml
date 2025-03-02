@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: r2dbc-flyway-postgres
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/todo_db?schema=public
+    username: postgres
+    password: mysecretpassword
+  flyway:
+    url: jdbc:postgresql://localhost:5432/todo_db
+    user: postgres
+    password: mysecretpassword
+    locations: classpath:db/migration
+    baseline-on-migrate: true

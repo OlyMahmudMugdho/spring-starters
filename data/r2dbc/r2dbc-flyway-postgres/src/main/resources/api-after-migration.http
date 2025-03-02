@@ -1,0 +1,44 @@
+### Base URL
+@baseUrl = http://localhost:8080/api/todos
+
+### Create a new Todo with priority
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "title": "Learn Reactive Spring",
+  "description": "Build a reactive Todo app with Spring Boot 3",
+  "completed": false,
+  "priority": 1
+}
+
+### Get all Todos
+GET {{baseUrl}}
+Content-Type: application/json
+
+### Get Todos by completed status (false)
+GET {{baseUrl}}/completed/false
+Content-Type: application/json
+
+### Get Todos by completed status (true)
+GET {{baseUrl}}/completed/true
+Content-Type: application/json
+
+### Get Todo by ID
+GET {{baseUrl}}/1
+Content-Type: application/json
+
+### Update Todo by ID
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "title": "Learn Reactive Spring",
+  "description": "Updated: Master reactive programming",
+  "completed": true,
+  "priority": 2
+}
+
+### Delete Todo by ID
+DELETE {{baseUrl}}/1
+Content-Type: application/json
