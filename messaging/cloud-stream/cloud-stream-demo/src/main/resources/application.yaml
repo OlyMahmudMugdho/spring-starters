@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: cloud-stream-demo
+  cloud:
+    stream:
+      bindings:
+        produceMessage-out-0:
+          destination: demo-topic
+        consumeMessage-in-0:
+          destination: demo-topic
+      kafka:
+        binder:
+          brokers: localhost:19092
+    function:
+      definition: produceMessage;consumeMessage

@@ -1,0 +1,8 @@
+### Send Message
+POST http://localhost:8080/send
+Content-Type: application/json
+
+{
+  "message": "hi",
+  "sender": "mugdho"
+}
