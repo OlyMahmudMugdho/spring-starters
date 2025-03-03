@@ -1,0 +1,64 @@
+### Base URL
+@baseUrl = http://localhost:8080/users
+
+### Create a User (Valid Input)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Alice",
+  "email": "alice@example.com"
+}
+
+### Create a User (Invalid Email - Expect 400 Bad Request)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": 2,
+  "name": "Bob",
+  "email": "bob"
+}
+
+### Create a User (Missing Name - Expect 400 Bad Request)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": 3,
+  "email": "charlie@example.com"
+}
+
+### Get a User by ID
+GET {{baseUrl}}/2
+
+### Get All Users (First Page, Sorted by Name Ascending)
+GET {{baseUrl}}?page=0&size=2&sortBy=name&sortDirection=asc
+
+### Get All Users (Second Page, Sorted by ID Descending)
+GET {{baseUrl}}?page=1&size=2&sortBy=id&sortDirection=desc
+
+### Update a User (Valid Input)
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "name": "Alicia",
+  "email": "alicia@example.com"
+}
+
+### Update a User (Invalid Email - Expect 400 Bad Request)
+PUT {{baseUrl}}/1
+Content-Type: application/json
+
+{
+  "name": "Alicia",
+  "email": "alicia@invalid"
+}
+
+### Delete a User
+DELETE {{baseUrl}}/1
+
+### Get Non-Existent User (Expect Empty Optional or 404 if enhanced)
+GET {{baseUrl}}/999

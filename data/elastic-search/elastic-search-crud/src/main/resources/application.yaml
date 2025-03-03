@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: elastic-search-crud
+  elasticsearch:
+    uris: http://localhost:9200
