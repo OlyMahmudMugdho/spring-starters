@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: grpc-server
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/todo_db

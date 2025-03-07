@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package todo;
+
+option java_multiple_files = true;
+option java_package = "com.mahmud.grpcclient";
+option java_outer_classname = "TodoProto";
+
+service TodoService {
+  rpc CreateTodo (TodoRequest) returns (TodoResponse) {}
+  rpc GetTodo (TodoIdRequest) returns (TodoResponse) {}
+  rpc ListTodos (ListTodosRequest) returns (ListTodosResponse) {}
+  rpc UpdateTodo (TodoRequest) returns (TodoResponse) {}
+  rpc DeleteTodo (TodoIdRequest) returns (Empty) {}
+}
+
+message TodoItem {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  bool completed = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+  optional google.protobuf.Timestamp due_date = 7;
+}
+
+message TodoRequest {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  bool completed = 4;
+  optional google.protobuf.Timestamp due_date = 5;
+}
+
+message TodoResponse {
+  TodoItem todo = 1;
+}
+
+message TodoIdRequest {
+  string id = 1;
+}
+
+message ListTodosRequest {
+  optional bool show_completed = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message ListTodosResponse {
+  repeated TodoItem todos = 1;
+  string next_page_token = 2;
+}
+
+message Empty {}
+
+import "google/protobuf/timestamp.proto";
