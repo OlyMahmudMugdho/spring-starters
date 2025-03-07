@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: spring-mail-sender
+  mail:
+    host: ${MAIL_HOST}
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
+    port: ${MAIL_PORT}
+
