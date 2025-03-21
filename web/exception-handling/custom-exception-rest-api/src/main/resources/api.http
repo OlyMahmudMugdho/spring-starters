@@ -1,0 +1,16 @@
+### Add an user
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "id": 5,
+  "name": "John Doe",
+  "admin": true
+}
+
+
+### Get All Users
+GET http://localhost:8080/api/users
+
+### Get an User
+GET http://localhost:8080/api/users/10
